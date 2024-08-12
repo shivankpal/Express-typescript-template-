@@ -1,0 +1,25 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo:5.0.2
+    restart: 'unless-stopped'
+    ports:
+      - '27018:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongodb_city_link:/data/db
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+
+volumes:
+  mongodb_city_link:
+    external: true
+  redis:
